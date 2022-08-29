@@ -101,6 +101,12 @@ function PreviousDay(day, month, year) {
 PreviousDay(30, 1, 2022);
 
 //--------------------HW2----------------
+/*
+Input: Nhập vào tháng và năm 
+Process: Nếu số năm chia hết cho 400 đó là năm nhuận và đồng thời số năm chia hết cho 4 và không chia hết cho 100 sẽ là năm nhuận
+         Sau đó kiểm tra tháng được nhập vào rơi vào tháng có tối đa có bao nhiêu ngày rồi in ra màn hình
+Output: In ra số ngày tối đa
+*/
 
 function checkYear(year) {
   // Nếu số năm chia hết cho 400,
@@ -131,6 +137,9 @@ function checkDateOfMonth(month, year) {
       day = 31;
     } else if (month == 2) {
       day = 29;
+    } else if (month < 1 || month > 12) {
+      console.log("Vui lòng nhập tháng hợp lệ");
+      return;
     } else {
       day = 30;
     }
@@ -157,16 +166,53 @@ function checkDateOfMonth(month, year) {
 checkDateOfMonth(1, 2020);
 
 //-------------HW3---------------
-a = 123;
+/* 
+Input: Nhập vào số có 3 chữ số
+Process: - Nếu số nhập vào bé hơn 100 và lớn hơn 999 thì nhập lại
+         - Sau đó chia lấy phân dư số có 3 chữ số cho 10 để tách ra được hàng đơn vị
+         - Sau đó chia số 3 chữ số cho 10 để tách ra được hai số hàng trăm và hàng chục
+         - Tiếp tục chia lấy dư cho mười để tách ra được hàng chục sau đó chia cho 10 để tách ra hàng trăm
+Output: Xuất ra giá trị số sau khi được tách
+*/
+a = 1234;
 if (a < 100 && a > 999) {
   console.log("Số này không hợp lệ");
+} else {
+  var donvi = a % 10;
+  a = Math.floor(a / 10);
+  var chuc = a % 10;
+  var tram = Math.floor(a / 10);
+
+  console.log("Số a là ", tram, chuc, donvi);
 }
 
-var donvi = a % 10;
-a = Math.floor(a / 10);
-var chuc = a % 10;
-var tram = Math.floor(a / 10);
-
-console.log("Số a là ", tram, chuc, donvi);
-
 //--------------HW4---------------
+/*
+Input : Nhập vào giá trị các tọa độ A,B,C và giá trị tọa độ trường học
+Process : Sử dụng hàm tính khoảng cách = (x-x)^2+(y-y)^2 để tính ra giá trị khoảng cách các tọa độ
+          So sánh các tọa độ vừa tìm được nếu tọa độ nào nhỏ nhất so với hai tọa độ còn lại thì đó là khoảng cách ngắn nhất
+Output : In ra màn hình khoảng cách ngắn nhất
+
+*/
+
+function calcDistance(x, y, xSchool, ySchool) {
+  var kc;
+  kc = Math.sqrt((x - xSchool) * (x - xSchool) + (y - ySchool) * (y - ySchool));
+  return kc;
+}
+var kcAS, kcBS, kcCS;
+
+kcAS = calcDistance(3, 6, 5, 6);
+console.log(kcAS);
+kcBS = calcDistance(1, 2, 5, 6);
+console.log(kcBS);
+kcCS = calcDistance(3, 4, 5, 6);
+console.log(kcCS);
+
+if (kcAS < kcBS && kcAS < kcCS) {
+  console.log("Khoảng cách tới trường từ A là ngắn nhất");
+} else if (kcBS < kcAS && kcBS < kcCS) {
+  console.log("Khoảng cách tới trường từ B là ngắn nhất");
+} else if (kcCS < kcAS && kcCS < kcBS) {
+  console.log("Khoảng cách tới trường từ B là ngắn nhất");
+}
